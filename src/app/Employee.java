@@ -2,20 +2,55 @@ package app;
 
 public class Employee {
 	
-	private String name; 
-	private String position;
+	/////////////////////////// PROPERTIES/FIELDS \\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+	String name; 
+	String position;
 	
-	public void handleCustomer() {
-		
+	
+	/////////////////////////// CONSTRUCTOR \\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+	
+	public Employee(String name, String position) {
+		this.name = name;
+		this.position = position;
 	}
 	
-	public void runCreditHistory() {
+	
+	/////////////////////////// METHODS \\\\\\\\\\\\\\\\\\\\\\\\\\\\
+	
+	public void handleCustomer(Customer cust, boolean finance, Vehicle vehicle) {
+//		double cost = vehicle.cost;
+//		double cash = cust.getCashOnHand();
 		
+		if(!finance) {
+			runCreditHistory(cust);
+		} else if(vehicle.cost <= cust.getCashOnHand()) {
+			processTransaction(cust, cust.getCashOnHand());
+		} else {
+			System.out.println("Come back with more money");
+		}
 	}
 	
-	public void processTransaction() {
-		
+	public void runCreditHistory(Customer cust) {
+		int credit = cust.getCreditScore();
+
+		if(credit < 550) {
+			System.out.println("Credit not approved");
+		} else if(credit > 550 && credit < 750) {
+			System.out.println("Credit approved");
+		} else if(credit > 750) {
+			System.out.println("You Qualify for 0% APR");
+		}
 	}
+	
+	public void processTransaction(Customer cust, Double cost) {
+		System.out.println("Bought Car");
+	}
+	
+	
+	
+	/////////////////////////// GETTERS & SETTERS \\\\\\\\\\\\\\\\\\\\\\\\\\\\
 	
 	
 	public String getName() {
